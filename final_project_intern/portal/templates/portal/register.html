@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Create Account · Student Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
+</head>
+<body class="auth-page">
+<div class="auth-card wide">
+  <div class="auth-logo"><span class="brand-mark">S</span><b>student<span>hub</span></b></div>
+  <h1>Create your account.</h1>
+  <p>Set up your student profile in a minute.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-grid">
+      <div><label>First name</label>{{ form.first_name }}{{ form.first_name.errors }}</div>
+      <div><label>Last name</label>{{ form.last_name }}{{ form.last_name.errors }}</div>
+      <div><label>Email</label>{{ form.email }}{{ form.email.errors }}</div>
+      <div><label>Register number</label>{{ form.register_number }}{{ form.register_number.errors }}</div>
+      <div><label>Password</label>{{ form.password1 }}{{ form.password1.errors }}</div>
+      <div><label>Confirm password</label>{{ form.password2 }}{{ form.password2.errors }}</div>
+    </div>
+    <button class="primary full" type="submit">Create account →</button>
+  </form>
+  <div class="auth-foot">Already registered? <a href="{% url 'login' %}">Sign in</a></div>
+</div>
+</body>
+</html>

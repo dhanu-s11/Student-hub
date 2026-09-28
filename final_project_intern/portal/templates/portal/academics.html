@@ -1,0 +1,5 @@
+{% extends "portal/base.html" %}{% block title %}Academics · Student Hub{% endblock %}{% block content %}
+<div class="page-heading"><span class="eyebrow">ACADEMICS</span><h1>Academic overview</h1><p>A quick view of your current academic record.</p></div>
+<div class="stat-grid"><div class="stat-card"><span>CGPA</span><strong>{{ academic.cgpa }}</strong><small>Out of 10.00</small></div><div class="stat-card blue"><span>10th</span><strong>{{ academic.tenth_percentage }}%</strong><small>Board percentage</small></div><div class="stat-card lilac"><span>12th</span><strong>{{ academic.twelfth_percentage }}%</strong><small>Board percentage</small></div></div>
+<section class="panel academic-detail"><h2>{{ profile.department }}</h2><p>{{ profile.get_year_display }} · {{ profile.register_number }}</p><div class="academic-bar"><span style="width:{{ academic.cgpa|floatformat:0 }}0%"></span></div><div class="detail-grid"><div><span>Backlogs</span><b>{{ academic.backlogs }}</b></div><div><span>Skills</span><b>{{ profile.skills|default:"Add skills in profile" }}</b></div></div><a class="secondary" href="{% url 'profile' %}">Edit academic details →</a></section>
+{% endblock %}

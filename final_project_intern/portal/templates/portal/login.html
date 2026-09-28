@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login · Student Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
+</head>
+<body class="auth-page">
+<div class="auth-card">
+  <div class="auth-logo"><span class="brand-mark">S</span><b>student<span>hub</span></b></div>
+  <h1>Welcome back.</h1>
+  <p>Sign in to continue to your student portal.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <label for="{{ form.username.id_for_label }}">Email</label>
+    {{ form.username }}
+    {{ form.username.errors }}
+    <label for="{{ form.password.id_for_label }}">Password</label>
+    {{ form.password }}
+    {{ form.password.errors }}
+    <button class="primary full" type="submit">Sign in →</button>
+  </form>
+  <div class="auth-foot">New here? <a href="{% url 'register' %}">Create an account</a></div>
+</div>
+</body>
+</html>

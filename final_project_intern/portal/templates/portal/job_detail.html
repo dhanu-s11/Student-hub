@@ -1,0 +1,9 @@
+{% extends "portal/base.html" %}{% block title %}{{ job.title }} · Student Hub{% endblock %}{% block content %}
+<a class="back" href="{% url 'jobs' %}">← Back to opportunities</a><section class="panel job-detail"><div class="detail-top"><div class="company-logo huge">{{ job.company.name|slice:":1"|upper }}</div><div><span class="eyebrow">{{ job.company.name }}</span><h1>{{ job.title }}</h1><p>{{ job.company.location }} · {{ job.work_mode }} · {{ job.package }}</p></div></div><div class="detail-grid"><div><span>Minimum CGPA</span><b>{{ job.minimum_cgpa }}</b></div><div><span>Application deadline</span><b>{{ job.deadline|date:"d M Y" }}</b></div><div><span>Skills</span><b>{{ job.skills_required }}</b></div></div><h2>About the role</h2><p class="description">{{ job.description|linebreaksbr }}</p>{% if applied %}
+<div class="success-box">✓ You have already applied for this role.</div>
+{% elif expired %}
+<div class="warning-box">Application deadline has passed.</div>
+{% else %}
+<form method="post">{% csrf_token %}<button class="primary" type="submit">Apply for this role →</button></form>
+{% endif %}</section>
+{% endblock %}

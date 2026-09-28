@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Student Hub{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'portal/css/style.css' %}">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <a class="brand" href="{% url 'dashboard' %}"><span class="brand-mark">S</span><span>student<span class="brand-blue">hub</span></span></a>
+  <div class="nav-label">MENU</div>
+  <nav>
+    <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}"><span>⌂</span> Dashboard</a>
+    <a class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}"><span>◎</span> My Profile</a>
+    <a class="{% if request.resolver_match.url_name == 'academics' %}active{% endif %}" href="{% url 'academics' %}"><span>▣</span> Academics</a>
+    <a class="{% if request.resolver_match.url_name == 'jobs' or request.resolver_match.url_name == 'job_detail' %}active{% endif %}" href="{% url 'jobs' %}"><span>◈</span> Opportunities</a>
+    <a class="{% if request.resolver_match.url_name == 'applications' %}active{% endif %}" href="{% url 'applications' %}"><span>✓</span> Applications</a>
+    <a class="{% if request.resolver_match.url_name == 'placed' %}active{% endif %}" href="{% url 'placed' %}"><span>★</span> Placed</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="mini-help"><b>Need help?</b><span>Our placement team is here for you.</span><a href="mailto:placement@example.com">Contact team →</a></div>
+    <form class="logout-form" method="post" action="{% url 'logout' %}">
+  {% csrf_token %}
+  <button class="logout" type="submit"><span>↪</span> Sign out</button>
+</form>
+  </div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div class="mobile-brand">student<span>hub</span></div>
+  <div class="top-actions"><button class="icon-btn" title="Notifications">♢<i></i></button><div class="user-chip"><div class="avatar">{{ request.user.first_name|default:request.user.username|slice:":1"|upper }}</div><div><b>{{ request.user.get_full_name|default:request.user.username }}</b><small>Student</small></div></div></div>
+</header>
+{% if messages %}<div class="messages">{% for message in messages %}<div class="toast">{{ message }}</div>{% endfor %}</div>{% endif %}
+<div class="content">{% block content %}{% endblock %}</div>
+</main>
+</div>
+<script src="{% static 'portal/js/app.js' %}"></script>
+</body>
+</html>

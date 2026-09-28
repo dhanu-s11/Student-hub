@@ -1,0 +1,5 @@
+{% extends "portal/base.html" %}{% block title %}Placed · Student Hub{% endblock %}{% block content %}
+<a class="back" href="{% url 'dashboard' %}">← Back to dashboard</a>
+<div class="page-heading"><span class="eyebrow">PLACEMENT</span><h1>Placement offers</h1><p>Roles where you have been selected.</p></div>
+<div class="job-list">{% for app in placements %}<article class="job-card"><div class="company-logo huge">{{ app.job.company.name|slice:":1"|upper }}</div><div class="job-copy"><span class="eyebrow">{{ app.job.company.name }} · {{ app.job.company.location }}</span><h2>{{ app.job.title }}</h2><p>{{ app.job.description|truncatewords:24 }}</p><div class="tags"><span>{{ app.job.package }}</span><span>{{ app.job.work_mode }}</span><span>Selected on {{ app.applied_at|date:"d M Y" }}</span></div></div><a class="primary" href="{% url 'job_detail' app.job.pk %}">View role</a></article>{% empty %}<div class="panel empty">No placement offers yet. Keep applying — your next opportunity could be the one. <a href="{% url 'jobs' %}">Browse opportunities →</a></div>{% endfor %}</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "portal/base.html" %}{% block title %}Opportunities · Student Hub{% endblock %}{% block content %}
+<div class="page-heading row-heading"><div><span class="eyebrow">PLACEMENT</span><h1>Find your next opportunity</h1><p>Explore roles that match your skills and goals.</p></div></div>
+<form class="searchbar" method="get"><input name="q" value="{{ q }}" placeholder="Search roles or companies..."><button class="primary" type="submit">Search</button></form>
+<div class="job-list">{% for job in jobs %}<article class="job-card"><div class="company-logo big">{{ job.company.name|slice:":1"|upper }}</div><div class="job-copy"><span class="eyebrow">{{ job.company.name }}</span><h2>{{ job.title }}</h2><p>{{ job.company.location }} · {{ job.work_mode }}</p><div class="tags"><span>{{ job.package }}</span><span>CGPA {{ job.minimum_cgpa }}+</span><span>Apply by {{ job.deadline|date:"d M" }}</span></div></div><a class="primary" href="{% url 'job_detail' job.pk %}">View role</a></article>{% empty %}<div class="panel empty">No opportunities found.</div>{% endfor %}</div>
+{% endblock %}

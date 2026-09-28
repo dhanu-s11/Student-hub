@@ -1,0 +1,4 @@
+{% extends "portal/base.html" %}{% block title %}Applications · Student Hub{% endblock %}{% block content %}
+<div class="page-heading"><span class="eyebrow">PLACEMENT</span><h1>My applications</h1><p>Track every opportunity from application to final outcome.</p></div>
+<section class="panel"><div class="table-wrap"><table><thead><tr><th>ROLE</th><th>COMPANY</th><th>DATE</th><th>STATUS</th></tr></thead><tbody>{% for app in applications %}<tr><td><b>{{ app.job.title }}</b></td><td>{{ app.job.company.name }}</td><td>{{ app.applied_at|date:"d M Y" }}</td><td><span class="status {{ app.status|slugify }}">{{ app.status }}</span></td></tr>{% empty %}<tr><td colspan="4" class="empty">You have not applied to any jobs yet. <a href="{% url 'jobs' %}">Explore jobs →</a></td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}
